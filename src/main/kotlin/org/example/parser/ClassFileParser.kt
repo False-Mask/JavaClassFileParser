@@ -17,7 +17,7 @@ class ClassFileParser {
         val minorVersion = input.readU2()
         val magorVersion = input.readU2()
         val constantPoolSize = input.readU2()
-        val cpInfo = readCpInfo()
+        val cpInfo = readCpInfo(input)
         val accessFlag = input.readU2()
         val thisClass = input.readU2()
         val supperClass = input.readU2()
@@ -65,7 +65,7 @@ class ClassFileParser {
         TODO()
     }
 
-    private fun readCpInfo(): ConstantPool {
+    private fun readCpInfo(input: InputStream): ConstantPool {
         TODO()
     }
 }
