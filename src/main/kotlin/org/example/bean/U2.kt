@@ -9,7 +9,7 @@ import kotlin.experimental.and
  *@description 一个两字节的数据
  */
 @JvmInline
-value class U2(val value: ByteArray) {
+value class U2(private val value: ByteArray) {
 
     init {
         assert(value.size == 2) {
@@ -19,6 +19,10 @@ value class U2(val value: ByteArray) {
 
     fun toHex(): ByteArray {
         return value
+    }
+
+    fun value(): Int {
+        return value[0].toInt().shl(4) + value[1]
     }
 
     override fun toString(): String {

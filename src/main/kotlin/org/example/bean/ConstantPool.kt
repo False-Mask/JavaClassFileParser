@@ -7,6 +7,13 @@ package org.example.bean
  */
 class ConstantPool {
 
+    private val cpInfos: MutableList<CPInfo> = mutableListOf()
+
+    fun add(cpInfo: CPInfo) {
+        cpInfos.add(cpInfo)
+    }
+
+
     companion object {
         const val CONSTANT_Class = 7
         const val CONSTANT_Fieldref = 9
@@ -29,3 +36,12 @@ class ConstantPool {
 
 
 }
+
+data class CPInfo(
+    val tag: U1,
+    val info: Info,
+)
+
+data class Info(
+    val value: ByteArray
+)
