@@ -50,22 +50,22 @@ class ClassFileParser {
     }
 
     private fun readAttributes(input: InputStream): Attributes {
-        TODO()
+        return Attributes()
     }
 
     private fun readMethods(input: InputStream): Methods {
-        TODO()
+        return Methods()
     }
 
     private fun readFields(input: InputStream): Fields {
-        TODO()
+        return Fields()
     }
 
     private fun readInterfaces(input: InputStream): Interfaces {
-        TODO()
+        return Interfaces()
     }
 
     private fun readCpInfo(input: InputStream): ConstantPool {
-        TODO()
+        return ConstantPool()
     }
 }
