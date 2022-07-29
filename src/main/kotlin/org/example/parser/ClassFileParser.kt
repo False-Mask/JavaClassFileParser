@@ -46,7 +46,7 @@ class ClassFileParser {
         val methodCount = input.readU2()
         val methods = readMethods(input)
         val attributeCount = input.readU2()
-        val attributes = readAttributes(input)
+        val attributes = readAttributes(attributeCount.value(),input)
         return ClassFile(
             magicNumber,
             minorVersion,
@@ -67,8 +67,15 @@ class ClassFileParser {
         )
     }
 
-    private fun readAttributes(input: InputStream): Attributes {
-        return Attributes()
+    private fun readAttributes(attrCount: Int, input: InputStream): Attributes {
+        val attrs = Attributes()
+        for (i in 0 until attrCount) {
+            val attrIndex = input.readU2()
+            val length = input.readU4()
+            val info = input.readNBytes(length.value())
+            attrs.add(AttributeInfo(attrIndex, length, info))
+        }
+        return attrs
     }
 
     private fun readMethods(input: InputStream): Methods {
