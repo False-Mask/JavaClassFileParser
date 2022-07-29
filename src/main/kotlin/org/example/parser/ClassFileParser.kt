@@ -40,7 +40,7 @@ class ClassFileParser {
         val thisClass = input.readU2()
         val supperClass = input.readU2()
         val interfaceCount = input.readU2()
-        val interfaces = readInterfaces(input)
+        val interfaces = readInterfaces(interfaceCount.value(), input)
         val fieldCount = input.readU2()
         val fieldInfo = readFields(input)
         val methodCount = input.readU2()
@@ -79,8 +79,12 @@ class ClassFileParser {
         return Fields()
     }
 
-    private fun readInterfaces(input: InputStream): Interfaces {
-        return Interfaces()
+    private fun readInterfaces(interfaceCount: Int, input: InputStream): Interfaces {
+        val interfaces = Interfaces()
+        for (i in 0 until interfaceCount) {
+            interfaces.add(input.readU2())
+        }
+        return interfaces
     }
 
     /**
