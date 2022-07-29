@@ -18,5 +18,6 @@ class FieldInfo(
     val accessFlag: U2,
     val nameIndex: U2,
     val descIndex: U2,
+    val attrsLength:U2,
     val attrs: Attributes
 )

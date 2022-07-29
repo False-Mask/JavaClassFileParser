@@ -12,5 +12,6 @@ import java.io.FileInputStream
 fun main() {
     val file = File("Test.class")
     val fileParser = ClassFileParser()
-    println(fileParser.parse(FileInputStream(file)))
+    val clasFile = fileParser.parse(FileInputStream(file))
+    println(clasFile)
 }

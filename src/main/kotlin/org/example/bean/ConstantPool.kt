@@ -13,6 +13,10 @@ class ConstantPool {
         cpInfos.add(cpInfo)
     }
 
+    fun get(index: Int): CPInfo {
+        return cpInfos[index]
+    }
+
 
     companion object {
         const val CONSTANT_Class = 7

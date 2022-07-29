@@ -42,9 +42,9 @@ class ClassFileParser {
         val interfaceCount = input.readU2()
         val interfaces = readInterfaces(interfaceCount.value(), input)
         val fieldCount = input.readU2()
-        val fieldInfo = readFields(fieldCount.value(),input)
+        val fieldInfo = readFields(fieldCount.value(), input)
         val methodCount = input.readU2()
-        val methods = readMethods(input)
+        val methods = readMethods(methodCount.value(),input)
         val attributeCount = input.readU2()
         val attributes = readAttributes(attributeCount.value(), input)
         return ClassFile(
@@ -78,8 +78,17 @@ class ClassFileParser {
         return attrs
     }
 
-    private fun readMethods(input: InputStream): Methods {
-        return Methods()
+    private fun readMethods(methodCount: Int, input: InputStream): Methods {
+        val methods = Methods()
+        repeat(methodCount) {
+            val flag = input.readU2()
+            val nameIndex = input.readU2()
+            val descIndex = input.readU2()
+            val attrCount = input.readU2()
+            val attrs = readAttributes(attrCount.value(), input)
+            methods.add(MethodInfo(flag,nameIndex,descIndex,attrCount,attrs))
+        }
+        return methods
     }
 
     private fun readFields(fieldCount: Int, input: InputStream): Fields {
@@ -90,7 +99,7 @@ class ClassFileParser {
             val descIndex = input.readU2()
             val attrCount = input.readU2()
             val attrInfo = readAttributes(attrCount.value(), input)
-            field.add(FieldInfo(flag, nameIndex, descIndex, attrInfo))
+            field.add(FieldInfo(flag, nameIndex, descIndex,attrCount, attrInfo))
         }
         return field
     }

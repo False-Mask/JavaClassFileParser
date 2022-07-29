@@ -18,6 +18,6 @@ data class MethodInfo(
     val nameIndex: U2,
     val descriptionIndex: U2,
     val attributesCount: U2,
-    val attributesInfo: List<AttributeInfo>
+    val attributesInfo: Attributes
 )
 
